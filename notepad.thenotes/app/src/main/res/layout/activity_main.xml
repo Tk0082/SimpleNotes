@@ -7,42 +7,82 @@
     android:orientation="vertical"
     android:background="@color/colorNOTES2"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:id="@+id/lbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:paddingTop="5dp"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:id="@+id/ciapp"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="15dp"
+            android:paddingBottom="3dp"
+            android:src="@drawable/thenotes"
+            tools:ignore="ContentDescription"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/graffit"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            tools:ignore="HardcodedText"/>
+        <ImageView
+            android:id="@+id/icinfo"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_info"
+            tools:ignore="ContentDescription"/>
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lin_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbar"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="5dp"
+        android:background="@drawable/back_tx_title" >
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView_home"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="#FFFFFF"
+        android:layout_marginEnd="30dp"
         app:iconifiedByDefault="false"
         app:queryHint="Buscar Notas ..." />
-
-
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchView_home"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp" />
-
+        android:layout_below="@+id/lin_search"
+        android:paddingTop="5dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="-13dp"
+        tools:ignore="NotSibling"
+        tools:listitem="@layout/notes_list"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="#F8FFFFFF"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="24dp"
-        android:tint="@color/white"
-        app:borderWidth="3dp"
-        app:backgroundTint="@color/white"
-        android:src="@drawable/ic_add" />
-
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/color6"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="24dp"
+            android:tint="@color/color1"
+            app:borderWidth="1dp"
+            app:backgroundTint="@color/color1"
+            android:src="@drawable/ic_add"
+            tools:ignore="ContentDescription"/>
 </RelativeLayout>

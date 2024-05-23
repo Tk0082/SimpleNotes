@@ -1,5 +1,6 @@
 package com.gbferking.thenotes.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
                 parent, false));
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
@@ -63,8 +65,10 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
         //11º add a logica de fixar a nota;
         if(list.get(position).isPinned()){
             holder.imageView_pin.setImageResource(R.drawable.thenotes);
+            holder.itemView.setSelected(true);
         }else{
             holder.imageView_pin.setImageResource(0);
+            holder.itemView.setSelected(false);
         }
         //13º add e tentar entender esse trecho e o de baixo
         int color_code = getRandomColor();
@@ -93,7 +97,6 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
 
         //importando cores
         colorCode.add(R.color.white);
-
 
         Random random = new Random();
         int random_color = random.nextInt(colorCode.size());
@@ -133,7 +136,7 @@ class NotesViewHolder extends RecyclerView.ViewHolder {
     //5º criar o ImageView e pegar informações em notes_list.xml e trazer.
     ImageView imageView_pin; //<===pegar esse componente
 
-//2º criar um construtor
+    //2º criar um construtor
     public NotesViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -143,8 +146,6 @@ class NotesViewHolder extends RecyclerView.ViewHolder {
         textView_notes = itemView.findViewById(R.id.textView_notes);
         textView_date = itemView.findViewById(R.id.textView_date);
         imageView_pin = itemView.findViewById(R.id.imageView_pin);
-
-
 
     }
 }

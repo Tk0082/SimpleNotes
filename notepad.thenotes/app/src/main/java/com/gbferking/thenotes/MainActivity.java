@@ -1,5 +1,7 @@
 package com.gbferking.thenotes;
 
+import static com.gbferking.thenotes.R.id.pin;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -9,11 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gbferking.thenotes.Adapters.NotesListAdapter;
@@ -33,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     List<Notes> notes = new ArrayList<>();
     RoomDB database;
     FloatingActionButton fab_add;
+    ImageView info;
+    Intent i;
+    PopupMenu popupMenu;
+    LinearLayout backcard;
 
     //1º----------------------------------------para selecionar notas
     Notes selectedNote;
@@ -49,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         recyclerView = findViewById(R.id.recycler_home);
         fab_add = findViewById(R.id.fab_add);
+
+        info = findViewById(R.id.icinfo);
 
         //2º=========================adicionando logica da barra de busca #search
         searchView_home = findViewById(R.id.searchView_home);
@@ -85,7 +99,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
         //3º=========================adicionando logica da barra de busca #search
 
+        info.setOnClickListener(view->{
+            i = new Intent(this, InfoActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        });
 
+        if (recyclerView.getY() != 0.0){
+            recyclerView.scrollToPosition(0);
+        }
     }
     //4º=========================adicionando logica da barra de busca #search
     private void filter(String newText) {
@@ -98,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         //pegando da classe adapter
         notesListAdapter.filterList(filterEdList);
+
+        notesListAdapter.notifyDataSetChanged();
     }
     //4º=========================adicionando logica da barra de busca #search
 
@@ -152,13 +176,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             //-------------------------------------função para entrar dentro da nota
             Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
             intent.putExtra("old_note", notes);
+            //noinspection deprecation
             startActivityForResult(intent, 102);
         }
             //-------------------------------------------função para entrar dentro da nota
 
         public void onLongClick(Notes notes, CardView cardView) {
             //2º----------------------------------------para selecionar notas
-            selectedNote = new Notes();
+            //selectedNote = new Notes();
             selectedNote = notes;
             showPopUp(cardView);
             //2º----------------------------------------para selecionar notas
@@ -167,11 +192,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     //3º----------------------------------------para selecionar notas
     private void showPopUp(CardView cardView) {
-        PopupMenu popupMenu = new PopupMenu(this, cardView);
+        popupMenu = new PopupMenu(this, cardView);
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.inflate(R.menu.popup_menu);
         popupMenu.show();
-
     }
     //3º----------------------------------------para selecionar notas
 
@@ -181,15 +205,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.pin:
+                int id = selectedNote.getID();
                 if(selectedNote.isPinned()){
                     database.mainDAO().pin(selectedNote.getID(), false);
-                    Toast.makeText(MainActivity.this, "Removido!", Toast.LENGTH_SHORT).show();
+                    showMessage("Removido!");
                 }
                 else{
                     database.mainDAO().pin(selectedNote.getID(), true);
-                    Toast.makeText(MainActivity.this, "Fixado!", Toast.LENGTH_SHORT).show();
+                    showMessage("Fixado!");
                 }
-
                 notes.clear();
                 notes.addAll(database.mainDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
@@ -201,10 +225,48 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 notesListAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "Nota Excluída", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.share:
+                String name = "TheNotes\nhttps://play.google.com/store/apps/details?id=com.gbferking.thenotes\n\n";
+                String title = "Compartilhar: "+selectedNote.getTitle().toString();
+                i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TITLE, title);
+                i.putExtra(Intent.EXTRA_TEXT, name + selectedNote.getNotes().toString());
+                startActivity(Intent.createChooser(i, null));
+                return true;
             default:
                 return false;
         }
    }
+
+   private void showMessage(String s) {
+       Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+   }
    //4º----------------------------------------para selecionar notas
 
+
+   @Override
+   protected void onRestart() {
+       recyclerView.scrollToPosition(0);
+       notesListAdapter.notifyDataSetChanged();
+       super.onRestart();
+   }
+
+   @Override
+   protected void onResume() {
+       recyclerView.scrollToPosition(0);  // Sempre retornar visualização do topo da RecyclerView
+       notesListAdapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        notesListAdapter.notifyDataSetChanged();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
