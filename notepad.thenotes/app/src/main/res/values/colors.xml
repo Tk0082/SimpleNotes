@@ -16,5 +16,9 @@
     <color name="color6">#D9D55B</color>
     <color name="colorNOTES">#F0F4C3</color>
     <color name="colorNOTES2">#FFF59D</color>
-
+    <color name="colorNOTES3">#FFFEF4</color>
+    <color name="graffit">#FF404040</color>
+    <color name="graffitl">#B3B3B3</color>
+    <color name="graffitd">#FF202020</color>
+    <color name="transparent">#00000000</color>
 </resources>

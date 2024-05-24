@@ -2,12 +2,15 @@ package com.gbferking.thenotes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.gbferking.thenotes.Models.Notes;
@@ -19,6 +22,7 @@ public class NotesTakerActivity extends AppCompatActivity {
     //1º passo, pegar os objetos;
     EditText editText_title, editText_notes;
     ImageView imageView_save;
+    RelativeLayout lbtn_save;
     Notes notes;
     //--------------------------função para entrar dentro da nota
     boolean isOldNote = false;
@@ -32,6 +36,7 @@ public class NotesTakerActivity extends AppCompatActivity {
         imageView_save = findViewById(R.id.imageView_save);
         editText_title = findViewById(R.id.editText_title);
         editText_notes = findViewById(R.id.editText_notes);
+        lbtn_save = findViewById(R.id.bck_btn);
 
 
         //------------------------------------------------função para entrar dentro da nota
@@ -41,16 +46,20 @@ public class NotesTakerActivity extends AppCompatActivity {
             editText_title.setText(notes.getTitle());
             editText_notes.setText(notes.getNotes());
             isOldNote = true;
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
         //-----------------------------------função para entrar dentro da nota
 
 
         //3ºpasso
-        imageView_save.setOnClickListener(new View.OnClickListener() {
+        lbtn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Evento de click no Botão Salvar(RelativeLayout)
+                ButtonClick click = new ButtonClick();
+                click.setClick(lbtn_save, NotesTakerActivity.this);
+
                 String title = editText_title.getText().toString();
                 String description = editText_notes.getText().toString();
 
@@ -85,5 +94,5 @@ public class NotesTakerActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
+    };
 }

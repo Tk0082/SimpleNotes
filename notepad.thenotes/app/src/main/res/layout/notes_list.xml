@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/color6"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:id="@+id/notes_container"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
-    android:layout_margin="8dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    android:layout_marginTop="13dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginHorizontal="7dp">
     <LinearLayout
+        android:id="@+id/card_lback"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_note_card">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:background="@color/transparent" >
             <TextView
                 android:id="@+id/textView_title"
                 android:layout_width="match_parent"
@@ -27,39 +31,46 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Title"
-                android:textColor="@color/black"
+                android:textColor="@color/graffitd"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
             <ImageView
                 android:id="@+id/imageView_pin"
                 android:layout_alignParentEnd="true"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:layout_margin="3dp"
+                tools:ignore="ContentDescription" />
         </RelativeLayout>
         <TextView
             android:id="@+id/textView_notes"
             android:text="Notes."
-            android:textColor="@color/black"
+            android:textColor="@color/graffit"
             android:textSize="14sp"
             android:textStyle="normal"
             android:maxLines="10"
             android:padding="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/textView_date"
             android:text="Date"
-            android:textColor="@color/grey"
+            android:textColor="@color/graffitl"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:textSize="14sp"
+            android:textSize="11sp"
             android:textStyle="normal"
+            android:textAlignment="textEnd"
             android:maxLines="10"
-            android:padding="8dp"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
