@@ -19,12 +19,14 @@ public class InfoActivity extends AppCompatActivity {
         TextView mail = findViewById(R.id.txvmail);
         TextView git = findViewById(R.id.txvgit);
         TextView play = findViewById(R.id.txvplay);
+        TextView contrib = findViewById(R.id.contrib);
 
         mail.setOnClickListener(view ->{
+            String url = "thenotes.app00@gmail.com";
             i = new Intent(Intent.ACTION_SENDTO);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setType("text/plain");
-            i.setData(Uri.parse("mailto:"+mail.getText()));
+            i.setData(Uri.parse("mailto:"+url));
             i.putExtra(Intent.EXTRA_TEXT,"Envie seu Feedback..");
             startActivity(Intent.createChooser(i, "Feedback TheNotes"));
             finish();
@@ -40,6 +42,14 @@ public class InfoActivity extends AppCompatActivity {
 
         play.setOnClickListener(view ->{
             String url = "https://play.google.com/store/apps/details?id=com.gbferking.thenotes";
+            i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        });
+
+        contrib.setOnClickListener(view ->{
+            String url = "https://github.com/Tk0082/SimpleNotes";
             i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

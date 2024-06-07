@@ -61,13 +61,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         recyclerView = findViewById(R.id.recycler_home);
         fab_add = findViewById(R.id.fab_add);
-
         info = findViewById(R.id.icinfo);
 
         //2º=========================adicionando logica da barra de busca #search
         searchView_home = findViewById(R.id.searchView_home);
+        searchView_home.clearFocus();
         //2º=========================adicionando logica da barra de busca #search
-
 
         database = RoomDB.getInstance(this);
         notes = database.mainDAO().getAll();
@@ -75,17 +74,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         updateRecycler(notes);
 
         //6º adicionar o bottao flutuante e criar uma activity, depois adicionamos.
-        fab_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
-                startActivityForResult(intent, 101);
-
-            }
+        fab_add.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
+            startActivityForResult(intent, 101);
         });
 
         //3º=========================adicionando logica da barra de busca #search
-        searchView_home.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView_home.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -99,16 +94,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
         //3º=========================adicionando logica da barra de busca #search
 
+        /* ACTIVITY DE INFORMAÇÃO */
         info.setOnClickListener(view->{
             i = new Intent(this, InfoActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         });
 
+        /* AÇÃO DE SEMPRE APRESENTAR A RECYCLERVIEW NO TOPO */
         if (recyclerView.getY() != 0.0){
             recyclerView.scrollToPosition(0);
         }
     }
+
     //4º=========================adicionando logica da barra de busca #search
     private void filter(String newText) {
         List<Notes> filterEdList = new ArrayList<>();
@@ -118,8 +116,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 filterEdList.add(singleNotes);
             }
         }
-        //pegando da classe adapter
-        notesListAdapter.filterList(filterEdList);
+
+        if(filterEdList.isEmpty()){
+            showMessage("Nenhuma nota encontrada!");
+        } else {
+            //pegando da classe adapter
+            notesListAdapter.filterList(filterEdList);
+        }
 
         notesListAdapter.notifyDataSetChanged();
     }
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     //apos implementar a classe NOTESTAKERACTIVITY, PASSO 7º. ADD ESSES PARAMENTROS
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -139,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 notes.addAll(database.mainDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
             }
-            //--------------------------------------------função para entrar dentro da nota
-        } else if(requestCode == 102){ //ele altera as info dentro da nota já criada
+        //---------------------------função para entrar dentro da nota
+        } else if (requestCode == 102){ //ele altera as info dentro da nota já criada
             if(resultCode==Activity.RESULT_OK){ //mostra as novas info add ou alteradas
                 Notes new_notes = (Notes) data.getSerializableExtra("note");
                 database.mainDAO().update(new_notes.getID(), new_notes.getTitle(), new_notes.getNotes());
@@ -148,11 +152,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 notes.addAll(database.mainDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
             }
-            //---------------------------------------------------função para entrar dentro da nota
+        //---------------------------função para entrar dentro da nota
         }
-
     }
-
 
     //2ºPasso
     private void updateRecycler(List<Notes> notes) {
@@ -168,18 +170,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         //4ºpasso
         recyclerView.setAdapter(notesListAdapter);
     }
+
     //3ªpasso
     private final NotesClickListener notesClickListener = new NotesClickListener() {
         @Override
         public void onClick(Notes notes) {
-
             //-------------------------------------função para entrar dentro da nota
             Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);
             intent.putExtra("old_note", notes);
             //noinspection deprecation
             startActivityForResult(intent, 102);
         }
-            //-------------------------------------------função para entrar dentro da nota
+            //-------------------------------------função para entrar dentro da nota
 
         public void onLongClick(Notes notes, CardView cardView) {
             //2º----------------------------------------para selecionar notas
@@ -201,11 +203,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     //4º----------------------------------------para selecionar notas
+    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.pin:
-                int id = selectedNote.getID();
                 if(selectedNote.isPinned()){
                     database.mainDAO().pin(selectedNote.getID(), false);
                     showMessage("Removido!");
@@ -218,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 notes.addAll(database.mainDAO().getAll());
                 notesListAdapter.notifyDataSetChanged();
                 return true;
-
             case R.id.delete:
                 database.mainDAO().delete(selectedNote);
                 notes.remove(selectedNote);
@@ -227,41 +228,38 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 return true;
             case R.id.share:
                 String name = "TheNotes\nhttps://play.google.com/store/apps/details?id=com.gbferking.thenotes\n\n";
-                String title = "Compartilhar: "+selectedNote.getTitle().toString();
+                String note = name+ selectedNote.getTitle() +"\n\n"+ selectedNote.getNotes();
+                String title = "Compartilhar: "+ selectedNote.getTitle();
                 i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
                 i.putExtra(Intent.EXTRA_TITLE, title);
-                i.putExtra(Intent.EXTRA_TEXT, name + selectedNote.getNotes().toString());
+                i.putExtra(Intent.EXTRA_TEXT, note );
                 startActivity(Intent.createChooser(i, null));
                 return true;
             default:
                 return false;
         }
    }
+   //4º----------------------------------------para selecionar notas
 
    private void showMessage(String s) {
        Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
    }
-   //4º----------------------------------------para selecionar notas
-
 
    @Override
    protected void onRestart() {
        recyclerView.scrollToPosition(0);
-       notesListAdapter.notifyDataSetChanged();
        super.onRestart();
    }
 
    @Override
    protected void onResume() {
        recyclerView.scrollToPosition(0);  // Sempre retornar visualização do topo da RecyclerView
-       notesListAdapter.notifyDataSetChanged();
-        super.onResume();
+       super.onResume();
     }
 
     @Override
     protected void onPause() {
-        notesListAdapter.notifyDataSetChanged();
         super.onPause();
     }
 
