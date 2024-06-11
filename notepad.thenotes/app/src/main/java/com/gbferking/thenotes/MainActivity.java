@@ -13,13 +13,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -31,9 +28,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-                                                //último passo: vamos implementar para o PopupMenu
+                    //último passo: vamos implementar para o PopupMenu
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     //1º passo:
     RecyclerView recyclerView;
@@ -194,10 +190,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     //3º----------------------------------------para selecionar notas
     private void showPopUp(CardView cardView) {
-        popupMenu = new PopupMenu(this, cardView);
-        popupMenu.setOnMenuItemClickListener(this);
-        popupMenu.inflate(R.menu.popup_menu);
-        popupMenu.show();
+        try {
+            popupMenu = new PopupMenu(this, cardView);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.setGravity(Gravity.CENTER);
+            popupMenu.inflate(R.menu.popup_menu);
+        } catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            popupMenu.show();
+        }
     }
     //3º----------------------------------------para selecionar notas
 

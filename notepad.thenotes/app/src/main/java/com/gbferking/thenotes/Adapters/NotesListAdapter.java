@@ -116,7 +116,6 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
     public void filterList(List<Notes> filterEdList){
         this.list = filterEdList;
         notifyDataSetChanged();
-
     }
     //1º=========================adicionando logica da barra de busca #search
 

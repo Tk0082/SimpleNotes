@@ -42,4 +42,7 @@
     <color name="notePurple">#BC96FF</color>
     <color name="notePurpled">#AD7FFF</color>
     <color name="notePurplel">#E7DAFF</color>
+    <color name="colorpopup">#FFF9C3</color>
+    <color name="colorpopupd">#FFF7A8</color>
+    <color name="colorpopupl">#FFFCE1</color>
 </resources>
