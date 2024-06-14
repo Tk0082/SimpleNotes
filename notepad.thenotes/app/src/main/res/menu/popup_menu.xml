@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/pin"
-        android:title="Fixar / Remover" />
+        android:title="@string/fixar_remover" />
     <item android:id="@+id/delete"
-        android:title="Excluir" />
+        android:title="@string/excluir" />
     <item android:id="@+id/share"
-        android:title="Compartilhar" />
+        android:title="@string/compartilhar" />
 </menu>

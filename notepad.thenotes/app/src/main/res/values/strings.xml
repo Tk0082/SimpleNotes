@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TheNotes</string>
+    <string name="autor">AUTOR</string>
+    <string name="co_autor">CO-AUTOR</string>
+    <string name="info_description">Este é um aplicativo de bloco de notas muito simples, tão fácil de usar quanto um bloco de notas.</string>
+    <string name="fixar_remover">Fixar / Remover</string>
+    <string name="excluir">Excluir</string>
+    <string name="compartilhar">Compartilhar</string>
 </resources>

@@ -1,24 +1,21 @@
 package com.gbferking.thenotes.Adapters;
 
 import android.annotation.SuppressLint;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-//import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.gbferking.thenotes.Models.Notes;
 import com.gbferking.thenotes.NotesClickListener;
 import com.gbferking.thenotes.R; //importar classe R.id
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -45,8 +42,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //8º remover o 'null' e add novos parametros;
-        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.notes_list,
-                parent, false));
+        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.notes_list, parent, false));
     }
 
     @SuppressLint("ResourceAsColor")
@@ -58,9 +54,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
         holder.textView_title.setSelected(true);
 
         holder.textView_notes.setText(list.get(position).getNotes());
-
         holder.textView_date.setText(list.get(position).getDate());
-        holder.textView_date.setSelected(true);
 
         //11º add a logica de fixar a nota;
         if(list.get(position).isPinned()){
@@ -70,33 +64,42 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
             holder.imageView_pin.setImageResource(0);
             holder.itemView.setSelected(false);
         }
-        //13º add e tentar entender esse trecho e o de baixo
-        int color_code = getRandomColor();
-        holder.notes_container.setCardBackgroundColor(holder.itemView.getResources().getColor(color_code, null));
-        holder.notes_container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onClick(list.get(holder.getAdapterPosition()));
-            }
+
+        // 13º add e tentar entender esse trecho e o de baixo
+        // int color_code = getRandomColor();
+        // holder.notes_container.setBackgroundColor(holder.itemView.getResources().getColor(color_code, null));
+        holder.lcard.setBackgroundResource(getRandomColor());
+
+        holder.notes_container.setOnClickListener(view -> {
+            listener.onClick(list.get(holder.getAdapterPosition()));
         });
 
         //14º add e tentar entender esse trecho e o de cima
-        holder.notes_container.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notes_container);
-                return true;
-            }
+        holder.notes_container.setOnLongClickListener(view -> {
+            listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notes_container);
+            return true;
         });
     }
 
     //12ºadicionar logica de cores diferentes(aleatorias) ao fixar a nota
-    //obs. pegar cores de colors.xml
+    //obs. pegar cores de colors.xml ou drawable/
     private int getRandomColor() {
         List<Integer> colorCode = new ArrayList<>();
 
-        //importando cores
-        colorCode.add(R.color.white);
+        //ADICIONANDO OS SHAPES DEGRADÉ
+        colorCode.add(R.drawable.back_note_card_blue);
+        colorCode.add(R.drawable.back_note_card_red);
+        colorCode.add(R.drawable.back_note_card);
+        colorCode.add(R.drawable.back_note_card_green);
+        colorCode.add(R.drawable.back_note_card_pink);
+        colorCode.add(R.drawable.back_note_card_purple);
+        colorCode.add(R.drawable.back_note_card_orange);
+        colorCode.add(R.drawable.back_note_card_yellow);
+
+        /*  ADICIONAR CORES SIMPLES
+            colorCode.add(R.color.noteRed);
+            colorCode.add(R.color.noteGreen);
+            colorCode.add(R.color.noteOrange); */
 
         Random random = new Random();
         int random_color = random.nextInt(colorCode.size());
@@ -105,24 +108,18 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
 
     @Override
     public int getItemCount() {
-        //9º remover 0 e add outro parametro
+        //9º remover 0 e add o tamanho da lista
         return list.size();
     }
 
     //1º=========================adicionando logica da barra de busca #search
     public void filterList(List<Notes> filterEdList){
-        list = filterEdList;
+        this.list = filterEdList;
         notifyDataSetChanged();
-
     }
     //1º=========================adicionando logica da barra de busca #search
 
-
-}
-
-
-
-//----------------------------------------------4º IMPLEMENTANDO METODOS-------------------------
+} //----------------------------------------------4º IMPLEMENTANDO METODOS-------------------------
 
 //1º criar uma classe
 class NotesViewHolder extends RecyclerView.ViewHolder {
@@ -136,6 +133,8 @@ class NotesViewHolder extends RecyclerView.ViewHolder {
     //5º criar o ImageView e pegar informações em notes_list.xml e trazer.
     ImageView imageView_pin; //<===pegar esse componente
 
+    LinearLayout lcard; // LinearLayout de fundo do CardView
+
     //2º criar um construtor
     public NotesViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -146,6 +145,6 @@ class NotesViewHolder extends RecyclerView.ViewHolder {
         textView_notes = itemView.findViewById(R.id.textView_notes);
         textView_date = itemView.findViewById(R.id.textView_date);
         imageView_pin = itemView.findViewById(R.id.imageView_pin);
-
+        lcard = itemView.findViewById(R.id.card_lback);
     }
 }
