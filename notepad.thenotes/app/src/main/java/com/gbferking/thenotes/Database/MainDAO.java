@@ -27,7 +27,7 @@ public interface MainDAO {
     //--------------------------------------------------------------------------------DATABASE
     //3ºCRIAR UMA LISTA para buscar tudo
     //4ºadicionar @Query e dentro add um SELECT para buscar na TABELA; dentro da classe Notes
-    @Query("SELECT * FROM notes ORDER BY id DESC")
+    @Query("SELECT * FROM notes WHERE pinned == false")
     List<Notes> getAll();
 
     //ESTAMOS BUSCANDO ESSAS INFORMAÇÕES NA VARIAVEL ID, DENTRO DA CLASSE NOTES
@@ -43,5 +43,8 @@ public interface MainDAO {
     //CRIAR METODO PARA FIXAR NOTA
     @Query("UPDATE notes SET pinned = :pin WHERE ID = :id")
     void pin(int id, boolean pin);
-
+    
+    // Lista que recebe as notas pinadas
+    @Query("SELECT * FROM notes WHERE pinned == true")
+    List<Notes> getPinned();
 }

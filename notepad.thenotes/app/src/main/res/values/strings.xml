@@ -6,4 +6,13 @@
     <string name="fixar_remover">Fixar / Remover</string>
     <string name="excluir">Excluir</string>
     <string name="compartilhar">Compartilhar</string>
+    <string name="btn_salvar">SALVAR</string>
+    <string name="hint_titulo">Título</string>
+    <string name="hint_nota">Digite sua nota..</string>
+    <string name="tx_pesquisa">Nenhuma nota encontrada!</string>
+    <string name="tx_pin_removido">Removido!</string>
+    <string name="tx_pin_fixado">Fixado!</string>
+    <string name="tx_msg_add_nota">Por favor, add uma nota!</string>
+    <string name="tx_compartilhar">"Compartilhar: "</string>
+    <string name="tx_nota_excluida">Nota Excluída!</string>
 </resources>

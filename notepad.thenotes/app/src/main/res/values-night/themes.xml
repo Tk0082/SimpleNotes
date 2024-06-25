@@ -2,30 +2,32 @@
     <!-- Base application theme. -->
     <style name="Theme.TheNotes" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color6</item>
+        <item name="colorPrimaryVariant">@color/colorNOTES2</item>
+        <item name="colorOnPrimary">@color/graffit</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/noteYellow</item>
+        <item name="colorSecondaryVariant">@color/noteYellowd</item>
+        <item name="colorOnSecondary">@color/graffitd</item>
+        <item name="android:textColorPrimary">@color/graffit</item>
+        <item name="android:textColorHint">@color/graffitl</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.TheNotes.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color6</item>
+        <item name="colorPrimaryVariant">@color/colorNOTES2</item>
+        <item name="colorOnPrimary">@color/graffitd</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/color1</item>
+        <item name="colorSecondaryVariant">@color/color6</item>
+        <item name="colorOnSecondary">@color/graffit</item>
+        <item name="android:textColorPrimary">@color/graffit</item>
+        <item name="android:textColorHint">@color/graffitl</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
 
         <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>

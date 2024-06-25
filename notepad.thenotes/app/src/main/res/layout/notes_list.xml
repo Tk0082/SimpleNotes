@@ -7,6 +7,10 @@
     android:id="@+id/notes_container"
     app:cardCornerRadius="13dp"
     app:cardElevation="3dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp"
     android:layout_marginHorizontal="8dp">

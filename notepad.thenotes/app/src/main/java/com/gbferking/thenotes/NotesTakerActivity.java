@@ -1,10 +1,11 @@
 package com.gbferking.thenotes;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,68 +27,63 @@ public class NotesTakerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_taker);
-
+        
         //2º passo, pegar os id
         imageView_save = findViewById(R.id.imageView_save);
         editText_title = findViewById(R.id.editText_title);
         editText_notes = findViewById(R.id.editText_notes);
         lbtn_save = findViewById(R.id.bck_btn);
-
-
+        
+        
         //------------------------------------------------função para entrar dentro da nota
         notes = new Notes();
         try {
             notes = (Notes) getIntent().getSerializableExtra("old_note");
-            editText_title.setText(notes.getTitle());
+            editText_title.setText(notes != null ? notes.getTitle() : null);
             editText_notes.setText(notes.getNotes());
             isOldNote = true;
         } catch (Exception e){
             e.printStackTrace();
         }
         //-----------------------------------função para entrar dentro da nota
-
-
+        
         //3ºpasso
-        lbtn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Evento de click no Botão Salvar(RelativeLayout)
-                ButtonClick click = new ButtonClick();
-                click.setClick(lbtn_save, NotesTakerActivity.this);
-
-                String title = editText_title.getText().toString();
-                String description = editText_notes.getText().toString();
-
-                //4º passo
-                if(description.isEmpty()){
-                    Toast.makeText(NotesTakerActivity.this, "Por favor, add uma nota!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                //5ªpasso
-                SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
-                Date date = new Date();
-
-                //=================================função para entrar dentro da nota
-
-                if(!isOldNote){
-                    notes = new Notes();
-                }
-
-                //==================================função para entrar dentro da nota
-
-
-                //6ªpasso
-                //notes = new Notes(); coloquei dentro do if acima;
-                notes.setTitle(title);
-                notes.setNotes(description);
-                notes.setDate(formatter.format(date));
-
-                //7ª passo
-                Intent intent = new Intent();
-                intent.putExtra("note", notes);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+        lbtn_save.setOnClickListener(view -> {
+            // Evento de click no Botão Salvar(RelativeLayout)
+            ButtonClick click = new ButtonClick();
+            click.setClick(lbtn_save, NotesTakerActivity.this);
+            
+            String title = editText_title.getText().toString();
+            String description = editText_notes.getText().toString();
+            
+            //4º passo
+            if(description.isEmpty()){
+                Toast.makeText(NotesTakerActivity.this, R.string.tx_msg_add_nota, Toast.LENGTH_SHORT).show();
+                return;
             }
+            
+            //5ªpasso
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm a");
+            Date date = new Date();
+            
+            //=================================função para entrar dentro da nota
+            if(!isOldNote){
+                notes = new Notes();
+            }
+            //==================================função para entrar dentro da nota
+            
+            //6ªpasso
+            //notes = new Notes(); coloquei dentro do if acima;
+            notes.setTitle(title);
+            notes.setNotes(description);
+            notes.setDate(formatter.format(date));
+            
+            //7ª passo
+            Intent intent = new Intent();
+            intent.putExtra("note", notes);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
         });
     };
 }

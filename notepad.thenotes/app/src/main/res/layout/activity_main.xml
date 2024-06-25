@@ -5,8 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorNOTES2"
+    android:background="?attr/colorPrimaryVariant"
     android:paddingBottom="10dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
     tools:context=".MainActivity">
     <LinearLayout
         android:id="@+id/lbar"
@@ -14,8 +18,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:paddingTop="5dp"
-        android:gravity="center_vertical"
-        >
+        android:gravity="center_vertical" >
         <ImageView
             android:id="@+id/ciapp"
             android:layout_width="40dp"
@@ -30,11 +33,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/app_name"
-            android:textColor="@color/graffit"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
+            android:shadowColor="@color/graffitl"
+            android:shadowRadius="3"
             android:textStyle="bold"
             android:layout_weight="1"
             tools:ignore="HardcodedText"/>
+
         <ImageView
             android:id="@+id/icinfo"
             android:layout_width="35dp"
@@ -42,8 +48,7 @@
             android:layout_marginEnd="15dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_info"
-            tools:ignore="ContentDescription"/>
-
+            tools:ignore="ContentDescription,ImageContrastCheck" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/lin_search"
@@ -54,36 +59,72 @@
         android:layout_marginTop="10dp"
         android:elevation="5dp"
         android:background="@drawable/back_tx_title" >
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView_home"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginEnd="30dp"
-        app:iconifiedByDefault="false"
-        app:queryHint="Buscar Notas ..." />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView_home"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginEnd="30dp"
+            app:iconifiedByDefault="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="?android:attr/textColorPrimary"
+            android:hint="?android:attr/textColorHint"
+            app:queryHint="Buscar Notas ..." />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPin"
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
+        android:layout_below="@+id/lin_search"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="5dp"
+        android:visibility="visible"
+        tools:ignore="NotSibling"
+        tools:listitem="@layout/pin_list" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/lin_search"
+        android:layout_below="@+id/recyclerPin"
         android:paddingTop="5dp"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="6dp"
         android:layout_marginTop="-10dp"
         tools:ignore="NotSibling"
         tools:listitem="@layout/notes_list"/>
+    <TextView
+        android:id="@+id/tx_pin_cont"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_toStartOf="@id/recyclerPin"
+        android:layout_alignBottom="@id/recyclerPin"
+        android:layout_marginEnd="-32dp"
+        android:layout_marginBottom="-3dp"
+        android:gravity="center"
+        android:text=""
+        android:visibility="visible"
+        android:textStyle="bold"
+        android:textColor="@color/graffit"
+        android:textSize="8sp"
+        android:background="@drawable/back_contador"
+        tools:ignore="HardcodedText,SmallSp" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/color6"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="24dp"
-            android:tint="@color/color1"
-            app:borderWidth="1dp"
-            app:backgroundTint="@color/color1"
-            android:src="@drawable/ic_add"
-            tools:ignore="ContentDescription"/>
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:backgroundTint="@color/color6"
+        android:foregroundTint="@color/graffitd"
+        android:src="@drawable/ic_add"
+        android:tint="@color/color1"
+        app:backgroundTint="@color/color1"
+        app:borderWidth="1dp"
+        tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </RelativeLayout>
