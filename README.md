@@ -6,6 +6,9 @@ This is a really simple notepad application which is as easy to use as a notepad
 
 <p>📲 ScreenShots </p>
 
+![Untitled design](https://github.com/bygabrielferreira/SimpleNotes/assets/161978029/94b87dc7-0013-45ed-bc95-029d3897ff92)
+
+
 https://github.com/bygabrielferreira/SimpleNotes/assets/161978029/2f876f58-e351-4299-8fd4-ac73ab943795
 
 <p>🖥️ <em>Technologies</em></p>
