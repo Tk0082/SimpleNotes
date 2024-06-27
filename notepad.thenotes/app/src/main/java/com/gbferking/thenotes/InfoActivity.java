@@ -26,7 +26,7 @@ public class InfoActivity extends AppCompatActivity {
             i = new Intent(Intent.ACTION_SENDTO);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setType("text/plain");
-            i.setData(Uri.parse("mailto:"+url));
+            i.setData(Uri.parse("mailto:".concat(url)));
             i.putExtra(Intent.EXTRA_TEXT,"Envie seu Feedback..");
             startActivity(Intent.createChooser(i, "Feedback TheNotes"));
             finish();

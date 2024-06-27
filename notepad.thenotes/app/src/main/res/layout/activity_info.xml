@@ -4,7 +4,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorNOTES2"
+    android:background="?attr/colorPrimaryVariant"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
     tools:context=".InfoActivity" >
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +23,8 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:shadowRadius="10"
-            android:shadowColor="#606060" />
+            android:textColor="?android:attr/textColorPrimary"
+            android:shadowColor="@color/graffit" />
         <ImageView
             android:layout_width="350dp"
             android:layout_height="350dp"
@@ -48,6 +53,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:textSize="20sp"
                 android:shadowRadius="2"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -59,6 +65,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -75,7 +82,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="60dp"
                 android:textSize="18sp"
-                android:shadowRadius="2"
+                android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -92,7 +100,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="60dp"
                 android:textSize="18sp"
-                android:shadowRadius="2"
+                android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -109,7 +118,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="60dp"
                 android:textSize="18sp"
-                android:shadowRadius="2"
+                android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -121,6 +131,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
             <TextView
@@ -138,7 +149,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="80dp"
                 android:textSize="18sp"
-                android:shadowRadius="2"
+                android:shadowRadius="3"
+                android:textColor="?android:attr/textColorPrimary"
                 android:shadowColor="@color/graffit"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

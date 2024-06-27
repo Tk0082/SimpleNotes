@@ -14,11 +14,13 @@
     <color name="color4">#E91E63</color>
     <color name="color5">#2196F3</color>
     <color name="color6">#D9D55B</color>
+    <color name="color7">#777648</color>
     <color name="colorNOTES">#F0F4C3</color>
     <color name="colorNOTES2">#FFF59D</color>
+    <color name="colorNOTES4">#8F8849</color>
     <color name="colorNOTES3">#FFFEF4</color>
     <color name="graffit">#FF404040</color>
-    <color name="graffitl">#FF656565</color>
+    <color name="graffitl">#808080</color>
     <color name="graffitd">#FF303030</color>
     <color name="transparent">#00000000</color>
     <color name="noteRed">#FF9696</color>

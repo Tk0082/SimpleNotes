@@ -1,8 +1,6 @@
 package com.gbferking.thenotes.Adapters;
 
 import android.annotation.SuppressLint;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -11,11 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.gbferking.thenotes.Models.Notes;
 import com.gbferking.thenotes.NotesClickListener;
-import com.gbferking.thenotes.R; //importar classe R.id
+import com.gbferking.thenotes.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -88,13 +91,22 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesViewHolder>{
 
         //ADICIONANDO OS SHAPES DEGRADÉ
         colorCode.add(R.drawable.back_note_card_blue);
+        colorCode.add(R.drawable.back_note_card_blue_light);
         colorCode.add(R.drawable.back_note_card_red);
+        colorCode.add(R.drawable.back_note_card_red_light);
         colorCode.add(R.drawable.back_note_card);
         colorCode.add(R.drawable.back_note_card_green);
+        colorCode.add(R.drawable.back_note_card_green_light);
         colorCode.add(R.drawable.back_note_card_pink);
+        colorCode.add(R.drawable.back_note_card_pink_light);
         colorCode.add(R.drawable.back_note_card_purple);
+        colorCode.add(R.drawable.back_note_card_purple_light);
         colorCode.add(R.drawable.back_note_card_orange);
+        colorCode.add(R.drawable.back_note_card_orange_light);
         colorCode.add(R.drawable.back_note_card_yellow);
+        colorCode.add(R.drawable.back_note_card_yellow_light);
+        colorCode.add(R.drawable.back_note_card_wine);
+        colorCode.add(R.drawable.back_note_card_wine_light);
 
         /*  ADICIONAR CORES SIMPLES
             colorCode.add(R.color.noteRed);

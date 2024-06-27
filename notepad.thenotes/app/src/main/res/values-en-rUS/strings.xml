@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TheNotes</string>
+    <string name="autor">AUTHOR</string>
+    <string name="co_autor">CO-AUTHOR</string>
+    <string name="info_description">This is a very simple notepad app that is as easy to use as a notepad.</string>
+    <string name="fixar_remover">Fix / Remove</string>
+    <string name="excluir">Delete</string>
+    <string name="compartilhar">Share</string>
+    <string name="btn_salvar">SAVE</string>
+    <string name="hint_titulo">Title</string>
+    <string name="hint_nota">Enter your note..</string>
+    <string name="tx_pesquisa">No notes found!</string>
+    <string name="tx_pin_removido">Removed!</string>
+    <string name="tx_pin_fixado">Pinned!</string>
+    <string name="tx_msg_add_nota">Please, add a note!</string>
+    <string name="tx_compartilhar">"Share: "</string>
+    <string name="tx_nota_excluida">Note Deleted!</string>
+</resources>

@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorNOTES2"
+    android:background="?attr/colorPrimaryVariant"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
     tools:context=".NotesTakerActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_notes"
@@ -25,11 +29,11 @@
                 android:layout_margin="3dp"
                 android:layout_toStartOf="@id/bck_btn"
                 android:background="@drawable/back_tx_title"
-                android:elevation="2dp"
+                android:elevation="3dp"
                 android:ems="10"
                 android:focusedByDefault="true"
-                android:hint="Título"
-                android:imeOptions="actionNext|actionDone"
+                android:hint="@string/hint_titulo"
+                android:imeOptions="actionNext"
                 android:inputType="textCapWords"
                 android:nextFocusRight="@id/editText_notes"
                 android:nextFocusDown="@id/editText_notes"
@@ -37,12 +41,11 @@
                 android:paddingVertical="5dp"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textColor="@color/graffitd"
-                android:textColorHint="@color/graffitl"
-                android:textSize="20sp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textColorHint="?android:attr/textColorHint"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="Autofill,HardcodedText,TextFields,UnusedAttribute,TextContrastCheck,VisualLintTextFieldSize" />
-
             <RelativeLayout
                 android:id="@+id/bck_btn"
                 android:layout_width="130dp"
@@ -61,11 +64,11 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/imageView_save"
                     android:layout_marginStart="12dp"
-                    android:text="SALVAR"
+                    android:text="@string/btn_salvar"
                     android:textColor="@color/graffit"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     tools:ignore="HardcodedText"/>
                 <ImageView
                     android:id="@+id/imageView_save"
@@ -77,11 +80,9 @@
                     android:paddingBottom="3dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/thenotes" tools:ignore="ContentDescription"/>
-
             </RelativeLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
     <EditText
         android:id="@+id/editText_notes"
         android:layout_width="match_parent"
@@ -93,19 +94,19 @@
         android:elevation="3dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Digite sua nota.."
+        android:hint="@string/hint_nota"
         android:imeOptions="normal"
         android:inputType="textMultiLine|textImeMultiLine"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="6dp"
         android:paddingVertical="10dp"
         android:scrollbarSize="2dp"
-        android:scrollbarStyle="insideInset"
+        android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical|horizontal"
+        android:fadeScrollbars="true"
         android:textAlignment="textStart"
-        android:textColor="@color/graffitd"
-        android:textColorHint="@color/graffitl"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textColorHint="?android:attr/textColorHint"
         android:textSize="16sp"
         android:textStyle="normal"
         tools:ignore="Autofill,HardcodedText,TextFields,TextContrastCheck,VisualLintTextFieldSize" />
-
 </LinearLayout>
